@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <PackageId>Babin-ArcFace</PackageId>
-    <Version>1.0.8</Version>
+    <Version>1.0.11</Version>
     <Authors>Babin Iaroslav</Authors>
     <TargetFramework>net7.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
@@ -10,7 +10,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <EmbeddedResource Include="arcfaceresnet100-8.onnx"/>
+    <EmbeddedResource Include="arcfaceresnet100-8.onnx">
+      <LogicalName>arcfrn.onnx</LogicalName>
+    </EmbeddedResource>
   </ItemGroup>
 
   <ItemGroup>

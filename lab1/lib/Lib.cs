@@ -100,7 +100,10 @@ namespace ArcFaceLib {
 
         public Face() 
         {
-            session = new InferenceSession("lib/arcfaceresnet100-8.onnx");  
+            using var modelStream = typeof(Face).Assembly.GetManifestResourceStream("arcfrn.onnx");
+            using var memoryStream = new MemoryStream();
+            if (modelStream is not null) { modelStream.CopyTo(memoryStream); }
+            session = new InferenceSession(memoryStream.ToArray());       
         }
     }
 }

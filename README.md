@@ -14,3 +14,13 @@ dotnet run --project app/
 ```
 **Особенности:**</br>
 Изображения берутся из папки images (по умолчанию face1.jpg и face2.jpg)
+
+**Лабораторная работа 2.**</br>
+Вариант 1б: приложение отображает два списка с изображениями.</br> Пользователь может выбрать изображения из каждого из списков и увидеть пару значений (distance, similarity). 
+
+**Что потребуется для запуска:**
+1) dotnet pack lab1/lib/
+2) dotnet run --project .\lab2\wpfapp\
+
+Интерфейс программы:</br>
+![GQe6-O6q7wY](https://user-images.githubusercontent.com/33328562/208581594-cee904a8-71ec-411f-bbc0-369e54f88b2f.jpg)

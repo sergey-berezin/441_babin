@@ -51,6 +51,11 @@ namespace ArcFaceLib {
             return Tuple.Create(Distance(embeddings1, embeddings2), Similarity(embeddings1, embeddings2));
         }
 
+        public Tuple<float, float> CompareByEmbeddings(float[] embeddings1, float[] embeddings2)
+        {
+            return Tuple.Create(Distance(embeddings1, embeddings2), Similarity(embeddings1, embeddings2));
+        }
+
         public async Task<Tuple<float, float>> CompareAsync(Tuple<byte[], byte[]> img, CancellationToken token) 
         {
             var stream1 = new MemoryStream(img.Item1);
@@ -77,7 +82,15 @@ namespace ArcFaceLib {
             return Tuple.Create(Distance(embeddings1, embeddings2), Similarity(embeddings1, embeddings2));
         }
 
-        private float[] GetEmbeddings(Image<Rgb24> face) 
+        public float[] GetEmbeddingsByPath(string path)
+        {
+            var image = Image.Load<Rgb24>(path);
+            var inputs = new List<NamedOnnxValue> { NamedOnnxValue.CreateFromTensor("data", ImageToTensor(image)) };
+            using IDisposableReadOnlyCollection<DisposableNamedOnnxValue> results = session.Run(inputs);
+            return Normalize(results.First(v => v.Name == "fc1").AsEnumerable<float>().ToArray());
+        }
+
+        public float[] GetEmbeddings(Image<Rgb24> face) 
         {
             var inputs = new List<NamedOnnxValue> { NamedOnnxValue.CreateFromTensor("data", ImageToTensor(face)) };
             using IDisposableReadOnlyCollection<DisposableNamedOnnxValue> results = session.Run(inputs);
